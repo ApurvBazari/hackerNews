@@ -4,6 +4,7 @@ import React from 'react'
 
 export default class HomePage extends React.Component {
   render() {
+    console.log('props------>', this.props.data)
     return(
       <div>HomePage</div>
     )
