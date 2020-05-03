@@ -27,10 +27,9 @@ app.get( "/", (req, res) => {
     })
 });
 
-app.listen( 8000 );
+app.listen(8000);
 
 function htmlTemplate(reactDom, styleTags) {
-  console.log
   return `
     <!DOCTYPE html>
     <html>

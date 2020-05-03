@@ -1,5 +1,6 @@
 import styled from 'styled-components'
 
 export const Container = styled.div`
-  color: yellow;
+  color: #FE6502;
+  cursor: pointer;
 `

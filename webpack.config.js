@@ -3,7 +3,7 @@ const nodeExternals = require('webpack-node-externals')
 const path = require('path')
 
 const js = {
-  test: /\.js$/,
+  test: /\.(js|jsx)$/,
   exclude: /node_modules/,
   use: {
     loader: 'babel-loader',
@@ -37,7 +37,7 @@ const clientConfig = {
   mode: 'development',
   target: 'web',
   entry: {
-    'home.js': path.resolve(__dirname, 'src/public/pages/home/index.js')
+    'home.js': path.resolve(__dirname, 'src/public/pages/home')
   },
   module: {
     rules: [js]
