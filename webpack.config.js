@@ -9,7 +9,7 @@ const js = {
     loader: 'babel-loader',
     options: {
       presets: ['@babel/react', '@babel/env'],
-      plugins: ['transform-class-properties']
+      plugins: ['transform-class-properties', 'babel-plugin-styled-components']
     }
   }
 }
