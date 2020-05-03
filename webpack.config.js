@@ -14,6 +14,11 @@ const js = {
   }
 }
 
+const svg = {
+  test: /\.svg$/,
+  loader: 'svg-url-loader'
+}
+
 const serverConfig = {
   mode: 'development',
   target: 'node',
@@ -25,7 +30,7 @@ const serverConfig = {
     'index.js': path.resolve(__dirname, 'src/index.js')
   },
   module: {
-    rules: [js]
+    rules: [js, svg]
   },
   output: {
     path: path.resolve(__dirname, 'dist'),
@@ -40,7 +45,7 @@ const clientConfig = {
     'home.js': path.resolve(__dirname, 'src/public/pages/home')
   },
   module: {
-    rules: [js]
+    rules: [js, svg]
   },
   output: {
     path: path.resolve(__dirname, 'dist/public'),

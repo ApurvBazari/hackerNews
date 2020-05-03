@@ -1,5 +1,8 @@
 import React from 'react'
 
+import Image from '../../components/Image'
+import UpIcon from '../../images/arrow_up.svg'
+
 import { Container, Comments, VoteCount, UpVote, News, NewsDetails, Url, Author, Hide } from './style'
 
 const NewsCol = (props) => {
@@ -8,7 +11,7 @@ const NewsCol = (props) => {
     <Container isEven={props.isEven}>
       <Comments>{props.commentsNum}</Comments>
       <VoteCount>{props.voteCount}</VoteCount>
-      <UpVote>^</UpVote>
+      <UpVote><Image imgSrc={UpIcon} /></UpVote>
       <News>
         {props.title}
         <NewsDetails>
