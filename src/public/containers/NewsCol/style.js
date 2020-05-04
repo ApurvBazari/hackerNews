@@ -17,6 +17,9 @@ export const Hide = styled.div`
   font-weight: bold;
   cursor: pointer;
   margin-left: 5px;
+  &:hover {
+    text-decoration: underline;
+  }
 `;
 
 export const Author = styled.div`

@@ -4,7 +4,7 @@ import {Container} from './style'
 
 const Button = (props) => {
   return(
-    <Container>
+    <Container onClick={props.onClick}>
       {props.children}
     </Container>
   )

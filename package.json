@@ -13,6 +13,7 @@
     "node-fetch": "^2.6.0",
     "react": "^16.13.1",
     "react-dom": "^16.13.1",
+    "react-svg-line-chart": "^2.0.2",
     "styled-components": "^5.1.0"
   },
   "devDependencies": {

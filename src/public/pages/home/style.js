@@ -2,6 +2,8 @@ import styled from 'styled-components'
 
 export const Table = styled.div``;
 
+export const Container = styled.div``;
+
 export const Buttons = styled.div`
   display: flex;
   float: right;

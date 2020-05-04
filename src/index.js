@@ -8,19 +8,20 @@ import HomePage from "./public/pages/home";
 
 const app = express();
 const sheet = new ServerStyleSheet()
-app.use( express.static(path.resolve( __dirname, "../dist" )));
+
+app.use(express.static(path.resolve( __dirname, "../dist" )));
 
 app.get( "/", (req, res) => {
-  const { page = 1 } = req.query;
+  const {page = 1} = req.query;
   fetch(`https://hn.algolia.com/api/v1/search?page=${page}`)
     .then(res => res.json())
     .then((data) => {
       const jsx = (
         <StyleSheetManager sheet={sheet.instance}>
-          <HomePage data={data}  />
+          <HomePage data={data} pageNum={page} />
         </StyleSheetManager>    
       );
-      const reactDom = renderToString( jsx );
+      const reactDom = renderToString(jsx);
       const styleTags = sheet.getStyleTags()
       res.writeHead(200, {"Content-Type": "text/html"});
       res.end( htmlTemplate(reactDom, styleTags));
@@ -40,7 +41,7 @@ function htmlTemplate(reactDom, styleTags) {
     ${styleTags}
     <body>
       <div id="root">${reactDom}</div>
-      <script src="./public/home.js"></script>
+      <script src="/public/home.js"></script>
     </body>
     </html>
   `;
