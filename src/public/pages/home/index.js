@@ -13,7 +13,8 @@ export default class HomePage extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      data: props.data
+      data: props.data || window.store,
+      pageNum: props.pageNum || window.pageNum
     }
   }
   
@@ -32,9 +33,7 @@ export default class HomePage extends React.Component {
   }
 
   render() {
-    console.log('props------>', this.props.data.hits[0])
-    const { pageNum } = this.props;
-    const { data } = this.state;
+    const { data, pageNum } = this.state;
     const chartData = this.getChartData(data.hits);
     console.log('chartData----->', chartData)
     return(

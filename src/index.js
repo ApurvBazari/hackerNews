@@ -24,13 +24,13 @@ app.get( "/", (req, res) => {
       const reactDom = renderToString(jsx);
       const styleTags = sheet.getStyleTags()
       res.writeHead(200, {"Content-Type": "text/html"});
-      res.end( htmlTemplate(reactDom, styleTags));
+      res.end(htmlTemplate(reactDom, styleTags, data, page));
     })
 });
 
 app.listen(8000);
 
-function htmlTemplate(reactDom, styleTags) {
+function htmlTemplate(reactDom, styleTags, data, page) {
   return `
     <!DOCTYPE html>
     <html>
@@ -41,6 +41,10 @@ function htmlTemplate(reactDom, styleTags) {
     ${styleTags}
     <body>
       <div id="root">${reactDom}</div>
+      <script>
+        window.store=${JSON.stringify(data)}
+        window.pageNum=${page}
+      </script>
       <script src="/public/index.js"></script>
     </body>
     </html>
