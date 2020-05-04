@@ -41,7 +41,7 @@ function htmlTemplate(reactDom, styleTags) {
     ${styleTags}
     <body>
       <div id="root">${reactDom}</div>
-      <script src="/public/home.js"></script>
+      <script src="/public/index.js"></script>
     </body>
     </html>
   `;

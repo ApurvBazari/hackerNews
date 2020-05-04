@@ -42,7 +42,7 @@ const clientConfig = {
   mode: 'development',
   target: 'web',
   entry: {
-    'home.js': path.resolve(__dirname, 'src/public/pages/home')
+    'index.js': path.resolve(__dirname, 'src/public/index.js')
   },
   module: {
     rules: [js, svg]
