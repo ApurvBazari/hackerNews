@@ -42,7 +42,7 @@ function htmlTemplate(reactDom, styleTags, data, page) {
     <body>
       <div id="root">${reactDom}</div>
       <script>
-        window.store=${JSON.stringify(data)}
+        window.store=${JSON.stringify(data.hits)}
         window.pageNum=${page}
       </script>
       <script src="/public/index.js"></script>

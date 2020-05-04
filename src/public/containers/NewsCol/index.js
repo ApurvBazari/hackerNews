@@ -20,7 +20,7 @@ const NewsCol = (props) => {
               {props.showUrl}
             </Url>
           ): ''}) by <Author>{props.author}</Author> 5 hrs ago
-          <Hide>[ hide ]</Hide>
+          <Hide onClick={() => props.onHide(props.id)}>[ hide ]</Hide>
         </NewsDetails>
       </News>
     </Container>
