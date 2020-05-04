@@ -6,12 +6,13 @@ import UpIcon from '../../images/arrow_up.svg'
 import { Container, Comments, VoteCount, UpVote, News, NewsDetails, Url, Author, Hide } from './style'
 
 const NewsCol = (props) => {
-  console.log(props.showUrl)
   return(
     <Container isEven={props.isEven}>
       <Comments>{props.commentsNum}</Comments>
       <VoteCount>{props.voteCount}</VoteCount>
-      <UpVote><Image imgSrc={UpIcon} /></UpVote>
+      <UpVote onClick={() => props.onVote(props.id)}>
+        <Image imgSrc={UpIcon} />
+      </UpVote>
       <News>
         {props.title}
         <NewsDetails>

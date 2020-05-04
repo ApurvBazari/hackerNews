@@ -19,7 +19,8 @@ export default class HomePage extends React.Component {
     super(props);
     this.state = {
       data: props.data ? props.data.hits : window.store,
-      pageNum: props.pageNum || window.pageNum
+      pageNum: props.pageNum || window.pageNum,
+      initialClientRender: true
     }
   }
   
@@ -64,23 +65,60 @@ export default class HomePage extends React.Component {
         storageIds.push(id)
         localStorage.setItem('hideNewsIds', JSON.stringify(storageIds))
       }
-      this.setState({
-        data: newData
-      })
     } else {
       localStorage.setItem('hideNewsIds', JSON.stringify([id]))
-      this.setState({
-        data: newData
-      })
     }
+    this.setState({
+      data: newData,
+      initialClientRender: false
+    })
+  }
+
+  onVote = id => {
+    const { data } = this.state;
+    const voteIds = JSON.parse(localStorage.getItem('voteNewsIds'))
+    let newData = [];
+    data.forEach(news => {
+      if(news.objectID === id) {
+        news.points++
+      }
+      newData.push(news)
+    })
+    if(voteIds) {
+      let flag = true
+      voteIds.forEach(vote => {
+        if(Object.keys(vote)[0] === id) {
+          vote[Object.keys(vote)[0]]++
+          flag = false
+        }
+      })
+      if(flag) {
+        voteIds.push({[id]: 1})
+      }
+      localStorage.setItem('voteNewsIds', JSON.stringify(voteIds))
+    } else {
+      localStorage.setItem('voteNewsIds', JSON.stringify([{[id]: 1}]))
+    }
+    this.setState({
+      data: newData,
+      initialClientRender: false
+    })
   }
 
   getDataWithLocal = () => {
-    const { data } = this.state;
+    const { data, initialClientRender } = this.state;
     const hideIds = JSON.parse(localStorage.getItem('hideNewsIds'));
+    const voteIds = JSON.parse(localStorage.getItem('voteNewsIds'))
     const updatedData = data;
-    hideIds.forEach(id => {
-      data.forEach((news, i) => {
+    initialClientRender && voteIds && voteIds.forEach(vote => {
+      updatedData.forEach((news, i) => {
+        if(Object.keys(vote)[0] === news.objectID) {
+          news.points = news.points + vote[Object.keys(vote)[0]]
+        }
+      })
+    })
+    initialClientRender && hideIds && hideIds.forEach(id => {
+      updatedData.forEach((news, i) => {
         if(id === news.objectID) {
           updatedData.splice(i,1)
         }
@@ -93,7 +131,6 @@ export default class HomePage extends React.Component {
     const { pageNum } = this.state;
     const data = typeof window !== 'undefined' ? this.getDataWithLocal() : this.state.data
     const chartData = typeof window !== 'undefined' ? this.getChartData(data) : null;
-    console.log('chartData----->', chartData)
     return(
       <Container>
         <Table>
@@ -111,6 +148,7 @@ export default class HomePage extends React.Component {
               fullUrl={news.url}
               showUrl={news.url && news.url.split('/')[2]}
               onHide={this.hideNews}
+              onVote={this.onVote}
             />
           )}
         </Table>
