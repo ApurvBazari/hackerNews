@@ -7,6 +7,8 @@ import Line from '../../components/Line';
 import NewsCol from '../../containers/NewsCol';
 import LineChart from '../../containers/LineChart';
 
+import fetch from 'node-fetch'
+
 import { Table, Buttons, Container } from './style'
 
 export default class HomePage extends React.Component {
@@ -19,16 +21,34 @@ export default class HomePage extends React.Component {
   }
   
   onPrevClick = () => {
-    console.log('clicked prev')
+    const { pageNum } = this.state;
+    fetch(`https://hn.algolia.com/api/v1/search?page=${pageNum - 1}`)
+      .then(res => res.json())
+      .then(data => {
+        window.history.pushState(data, '', `?page=${pageNum - 1}`);
+        this.setState({
+          data: data,
+          pageNum: pageNum - 1,
+        })
+      })
   }
 
   onNextClick = () => {
-    console.log('Next clicked')
+    const { pageNum } = this.state;
+    fetch(`https://hn.algolia.com/api/v1/search?page=${pageNum + 1}`)
+      .then(res => res.json())
+      .then(data => {
+        window.history.pushState(data, '', `?page=${pageNum + 1}`);
+        this.setState({
+          data: data,
+          pageNum: pageNum + 1,
+        })
+      })
   }
 
   getChartData = (data) => {
     const chartData = [];
-    data.forEach((news, i) => chartData.push({x: i+1, y: Math.floor(news.points), label: news.objectID}))
+    data.forEach((news, i) => chartData.push({x: i+1, y: news.points, label: news.objectID}))
     return chartData;
   }
 

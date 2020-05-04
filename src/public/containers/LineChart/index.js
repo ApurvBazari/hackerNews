@@ -11,11 +11,8 @@ export default class Chart extends React.Component{
 
   labelsFormatX = x => {
     const { data } = this.state
-    const labelX = data.map(item => {
-      if(item.x === x)
-        return item.label
-    })
-    return labelX
+    const itemX = data.find(item => item.x === x)
+    return itemX.label
   }
 
   render(){
