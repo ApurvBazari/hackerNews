@@ -29,11 +29,10 @@ export default class HomePage extends React.Component {
     fetch(`https://hn.algolia.com/api/v1/search?page=${pageNum - 1}`)
       .then(res => res.json())
       .then(data => {
-        window.history.pushState(data, '', `?page=${pageNum - 1}`);
         this.setState({
-          data: data,
+          data: data.hits,
           pageNum: pageNum - 1,
-        })
+        },() => window.history.pushState(data, '', `?page=${pageNum - 1}`))
       })
   }
 
@@ -42,11 +41,10 @@ export default class HomePage extends React.Component {
     fetch(`https://hn.algolia.com/api/v1/search?page=${pageNum + 1}`)
       .then(res => res.json())
       .then(data => {
-        window.history.pushState(data, '', `?page=${pageNum + 1}`);
         this.setState({
-          data: data,
+          data: data.hits,
           pageNum: pageNum + 1,
-        })
+        }, () => window.history.pushState(data, '', `?page=${pageNum + 1}`))
       })
   }
 
