@@ -37,6 +37,7 @@ function htmlTemplate(reactDom, styleTags, data, page) {
     <head>
       <meta charset="utf-8">
       <title>React SSR</title>
+      <link rel="shortcut icon" href="#">
     </head>
     ${styleTags}
     <body>
