@@ -4,7 +4,8 @@
   "description": "Hacker News Clone",
   "main": "index.js",
   "scripts": {
-    "dev": "webpack && concurrently \"webpack --watch\" \"nodemon dist\""
+    "dev": "webpack && concurrently \"webpack --watch\" \"nodemon dist\"",
+    "start": "webpack && concurrently \"webpack --watch\" \"nodemon dist\""
   },
   "author": "Apurv Bazari",
   "license": "ISC",
