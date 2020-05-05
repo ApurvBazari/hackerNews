@@ -7,6 +7,9 @@
     "dev": "webpack && concurrently \"webpack --watch\" \"nodemon dist\"",
     "start": "webpack && concurrently \"webpack --watch\" \"nodemon dist\""
   },
+  "engines": {
+    "node": "10.16.3"
+  },
   "author": "Apurv Bazari",
   "license": "ISC",
   "dependencies": {
