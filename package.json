@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "dev": "webpack && concurrently \"webpack --watch\" \"nodemon dist\"",
-    "start": "webpack"
+    "start": "webpack && node dist"
   },
   "engines": {
     "node": "10.16.3"
