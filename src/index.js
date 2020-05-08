@@ -9,6 +9,13 @@ import HomePage from "./public/pages/home";
 const app = express();
 const sheet = new ServerStyleSheet()
 
+if (process.env.NODE_ENV === 'production') {
+app.use(express.static('dist'));
+app.get('*', (request, response) => {
+response.sendFile(path.join(__dirname, 'dist', 'index.html'));
+});
+} else {
+
 app.use(express.static(path.resolve( __dirname, "../dist" )));
 
 app.get( "*", (req, res) => {
@@ -50,4 +57,5 @@ function htmlTemplate(reactDom, styleTags, data, page) {
     </body>
     </html>
   `;
+}
 }

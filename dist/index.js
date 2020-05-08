@@ -117,31 +117,34 @@ __webpack_require__.r(__webpack_exports__);
 
 var app = express__WEBPACK_IMPORTED_MODULE_0___default()();
 var sheet = new styled_components__WEBPACK_IMPORTED_MODULE_5__["ServerStyleSheet"]();
-app.use(express__WEBPACK_IMPORTED_MODULE_0___default.a["static"](path__WEBPACK_IMPORTED_MODULE_1___default.a.resolve(__dirname, "../dist")));
-app.get("*", function (req, res) {
-  var _req$query$page = req.query.page,
-      page = _req$query$page === void 0 ? 1 : _req$query$page;
-  node_fetch__WEBPACK_IMPORTED_MODULE_2___default()("https://hn.algolia.com/api/v1/search?page=".concat(page)).then(function (res) {
-    return res.json();
-  }).then(function (data) {
-    var jsx = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(styled_components__WEBPACK_IMPORTED_MODULE_5__["StyleSheetManager"], {
-      sheet: sheet.instance
-    }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_public_pages_home__WEBPACK_IMPORTED_MODULE_6__["default"], {
-      data: data,
-      pageNum: page
-    }));
-    var reactDom = Object(react_dom_server__WEBPACK_IMPORTED_MODULE_4__["renderToString"])(jsx);
-    var styleTags = sheet.getStyleTags();
-    res.writeHead(200, {
-      "Content-Type": "text/html"
-    });
-    res.end(htmlTemplate(reactDom, styleTags, data, page));
-  });
-});
-app.listen(8000);
 
-function htmlTemplate(reactDom, styleTags, data, page) {
-  return "\n    <!DOCTYPE html>\n    <html>\n    <head>\n      <meta charset=\"utf-8\">\n      <title>React SSR</title>\n      <link rel=\"shortcut icon\" href=\"#\">\n    </head>\n    ".concat(styleTags, "\n    <body>\n      <div id=\"root\">").concat(reactDom, "</div>\n      <script>\n        window.store=").concat(JSON.stringify(data.hits), "\n        window.pageNum=").concat(page, "\n      </script>\n      <script src=\"/public/index.js\"></script>\n    </body>\n    </html>\n  ");
+if (false) {} else {
+  var htmlTemplate = function htmlTemplate(reactDom, styleTags, data, page) {
+    return "\n    <!DOCTYPE html>\n    <html>\n    <head>\n      <meta charset=\"utf-8\">\n      <title>React SSR</title>\n      <link rel=\"shortcut icon\" href=\"#\">\n    </head>\n    ".concat(styleTags, "\n    <body>\n      <div id=\"root\">").concat(reactDom, "</div>\n      <script>\n        window.store=").concat(JSON.stringify(data.hits), "\n        window.pageNum=").concat(page, "\n      </script>\n      <script src=\"/public/index.js\"></script>\n    </body>\n    </html>\n  ");
+  };
+
+  app.use(express__WEBPACK_IMPORTED_MODULE_0___default.a["static"](path__WEBPACK_IMPORTED_MODULE_1___default.a.resolve(__dirname, "../dist")));
+  app.get("*", function (req, res) {
+    var _req$query$page = req.query.page,
+        page = _req$query$page === void 0 ? 1 : _req$query$page;
+    node_fetch__WEBPACK_IMPORTED_MODULE_2___default()("https://hn.algolia.com/api/v1/search?page=".concat(page)).then(function (res) {
+      return res.json();
+    }).then(function (data) {
+      var jsx = /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(styled_components__WEBPACK_IMPORTED_MODULE_5__["StyleSheetManager"], {
+        sheet: sheet.instance
+      }, /*#__PURE__*/react__WEBPACK_IMPORTED_MODULE_3___default.a.createElement(_public_pages_home__WEBPACK_IMPORTED_MODULE_6__["default"], {
+        data: data,
+        pageNum: page
+      }));
+      var reactDom = Object(react_dom_server__WEBPACK_IMPORTED_MODULE_4__["renderToString"])(jsx);
+      var styleTags = sheet.getStyleTags();
+      res.writeHead(200, {
+        "Content-Type": "text/html"
+      });
+      res.end(htmlTemplate(reactDom, styleTags, data, page));
+    });
+  });
+  app.listen(8000);
 }
 
 /***/ }),
