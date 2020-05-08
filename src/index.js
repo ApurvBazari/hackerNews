@@ -10,12 +10,14 @@ const app = express();
 const sheet = new ServerStyleSheet()
 
 if (process.env.NODE_ENV === 'production') {
+  console.log('Production')
 app.use(express.static('dist'));
 app.get('*', (request, response) => {
 response.sendFile(path.join(__dirname, 'dist', 'index.html'));
 });
 } else {
-
+  console.log('Developemnt')
+  console.log(process.env.NODE_ENV)
 app.use(express.static(path.resolve( __dirname, "../dist" )));
 
 app.get( "*", (req, res) => {

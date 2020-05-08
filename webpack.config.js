@@ -20,7 +20,7 @@ const svg = {
 }
 
 const serverConfig = {
-  mode: 'development',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   target: 'node',
   devtool: 'source-map',
   node: {
@@ -40,7 +40,7 @@ const serverConfig = {
 }
 
 const clientConfig = {
-  mode: 'development',
+  mode: process.env.NODE_ENV === 'production' ? 'production' : 'development',
   target: 'web',
   devtool: 'source-map',
   entry: {
