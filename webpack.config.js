@@ -22,6 +22,7 @@ const svg = {
 const serverConfig = {
   mode: 'development',
   target: 'node',
+  devtool: 'source-map',
   node: {
     __dirname: false
   },
@@ -41,6 +42,7 @@ const serverConfig = {
 const clientConfig = {
   mode: 'development',
   target: 'web',
+  devtool: 'source-map',
   entry: {
     'index.js': path.resolve(__dirname, 'src/public/index.js')
   },

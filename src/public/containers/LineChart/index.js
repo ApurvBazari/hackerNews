@@ -2,21 +2,14 @@ import React from 'react'
 import LineChart from 'react-svg-line-chart'
 
 export default class Chart extends React.Component{
-  constructor(props) {
-    super(props);
-    this.state = {
-      data: props.data
-    }
-  }
-
   labelsFormatX = x => {
-    const { data } = this.state
+    const { data } = this.props
     const itemX = data.find(item => item.x === x)
     return itemX.label
   }
 
   render(){
-    const { data } = this.state
+    const { data } = this.props
     return(
       <LineChart
         data={data}
