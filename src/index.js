@@ -11,7 +11,7 @@ const sheet = new ServerStyleSheet()
 
 app.use(express.static(path.resolve( __dirname, "../dist" )));
 
-app.get( "/", (req, res) => {
+app.get( "*", (req, res) => {
   const {page = 1} = req.query;
   fetch(`https://hn.algolia.com/api/v1/search?page=${page}`)
     .then(res => res.json())
